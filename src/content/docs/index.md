@@ -6,7 +6,7 @@ hero:
   tagline: Exploring Verlet integration and system architecture.
   actions:
     - text: View Simulations
-      link: /simulations/network/
+      link: /visualise_understanding/simulations/network/
       icon: right-arrow
       variant: primary
 ---
