@@ -1,0 +1,42 @@
+---
+// src/components/physics/VerletBase.astro
+const { height = "400px", title = "Simulation" } = Astro.props;
+---
+
+<div class="simulation-wrapper">
+    <h3>{title}</h3>
+    <div id="d3-container" style={`height: ${height};`}></div>
+</div>
+
+<script>
+    import * as d3 from 'd3';
+
+    // Initialize your Verlet Engine here
+    const container = document.querySelector('#d3-container');
+    const width = container.clientWidth;
+    const height = container.clientHeight;
+
+    const svg = d3.select('#d3-container')
+        .append('svg')
+        .attr('width', '100%')
+        .attr('height', '100%')
+        .attr('viewBox', `0 0 ${width} ${height}`);
+
+    // Your D3 Physics Code logic goes here
+</script>
+
+<style>
+    .simulation-wrapper {
+        border: 1px solid var(--sl-color-gray-5);
+        border-radius: 8px;
+        padding: 1.5rem;
+        background: var(--sl-color-bg-inline-code);
+        margin: 2rem 0;
+    }
+    #d3-container {
+        width: 100%;
+        background: #000;
+        border-radius: 4px;
+        overflow: hidden;
+    }
+</style>

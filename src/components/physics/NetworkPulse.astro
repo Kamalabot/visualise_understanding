@@ -1,0 +1,48 @@
+---
+// src/components/physics/NetworkPulse.astro
+---
+<div class="canvas-mount">
+  <div id="viz"></div>
+</div>
+
+<script>
+  import * as d3 from 'd3';
+
+  // Basic D3 setup to verify it's working
+  const width = 600;
+  const height = 200;
+  
+  const svg = d3.select("#viz")
+    .append("svg")
+    .attr("viewBox", `0 0 ${width} ${height}`)
+    .style("width", "100%")
+    .style("height", "auto");
+
+  // Create a pulsing "node" to test animation
+  const circle = svg.append("circle")
+    .attr("cx", width / 2)
+    .attr("cy", height / 2)
+    .attr("r", 20)
+    .attr("fill", "#38bdf8");
+
+  function pulse() {
+    circle.transition()
+      .duration(1000)
+      .attr("r", 40)
+      .transition()
+      .duration(1000)
+      .attr("r", 20)
+      .on("end", pulse);
+  }
+  
+  pulse();
+</script>
+
+<style>
+  .canvas-mount {
+    background: #0f172a;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 1rem 0;
+  }
+</style>
