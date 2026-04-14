@@ -23,6 +23,12 @@ export default defineConfig({
 					items: [
 						{ label: 'Network Physics', link: '/simulations/network/' }
 					] 
+        },
+        { 
+					label: 'Production Workflow', 
+					items: [
+						{ label: 'Field POC to Production Workflow', link: '/engineer/production-workflow/' }
+					] 
 				},
 			],
 		}),
