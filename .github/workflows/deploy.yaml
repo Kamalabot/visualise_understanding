@@ -1,13 +1,14 @@
 name: Deploy to GitHub Pages
 
 on:
-  # Triggers the workflow on push to the main branch
   push:
-    branches: [ main ]
-  # Allows you to run this workflow manually from the Actions tab
+    branches: [main]
   workflow_dispatch:
 
-# Allow this job to clone the repo and create a page deployment
+# Force GitHub's internal runners to use Node 24 to clear the deprecation warning
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 permissions:
   contents: read
   pages: write
@@ -19,9 +20,12 @@ jobs:
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v4
+
       - name: Install, build, and upload your site
         uses: withastro/action@v3
-        # withastro/action automatically detects npm, installs deps, and runs `astro build`
+        with:
+          # Explicitly tell Astro to build using Node 24 as well
+          node-version: 24
 
   deploy:
     needs: build
