@@ -6,10 +6,10 @@ hero:
   tagline: Interactive simulations for engineering concepts.
   actions:
     - text: System Architecture
-      link: visualise_understanding/architecture/system-overview/
+      link: /architecture/system-overview/
       icon: rocket
       variant: primary
     - text: View Simulations
-      link: visualise_understanding/simulations/network/
+      link: /simulations/network/
       icon: right-arrow
 ---
