@@ -1,0 +1,107 @@
+---
+// src/components/physics/WorkflowSim.astro
+---
+<div class="sim-container">
+  <div id="viz-mount"></div>
+  <p class="legend">Simulation: Particle flow demonstrates the sequential logic. If approval (4) fails, research (3) must be refined.</p>
+</div>
+
+<script>
+  import * as d3 from 'd3';
+
+  // Define the Workflow Steps
+  const nodes = [
+    { id: 1, label: "1. Request Received", color: "#64748b" },
+    { id: 2, label: "2. Draw Block Diagram", color: "#94a3b8" },
+    { id: 3, label: "3. AI Tech Feasibility", color: "#38bdf8" },
+    { id: 4, label: "4. Requester Approval", color: "#0ea5e9" },
+    { id: 5, label: "5. START CODING", color: "#7dd3fc" },
+  ];
+
+  // Map the links for the sequential flow
+  const links = [
+    { source: 1, target: 2 },
+    { source: 2, target: 3 },
+    { source: 3, target: 4 },
+    { source: 4, target: 5 }, // Ideal flow
+  ];
+
+  const width = 800;
+  const height = 300;
+  
+  const svg = d3.select("#viz-mount")
+    .append("svg")
+    .attr("viewBox", `0 0 ${width} ${height}`)
+    .style("width", "100%")
+    .style("height", "auto");
+
+  // Create links (paths)
+  const link = svg.append("g")
+    .attr("stroke", "#334155")
+    .attr("stroke-width", 2)
+    .selectAll("line")
+    .data(links)
+    .join("line");
+
+  // Create node containers
+  const node = svg.append("g")
+    .selectAll("g")
+    .data(nodes)
+    .join("g")
+    .attr("class", "node-group");
+
+  // Add rectangles
+  node.append("rect")
+    .attr("width", 160)
+    .attr("height", 40)
+    .attr("rx", 6)
+    .attr("fill", d => d.color)
+    .attr("x", -80)
+    .attr("y", -20);
+
+  // Add labels
+  node.append("text")
+    .text(d => d.label)
+    .attr("text-anchor", "middle")
+    .attr("dy", 5)
+    .attr("fill", "#020617")
+    .attr("font-size", "14px")
+    .attr("font-weight", "600");
+
+  // --- Verlet Integration Engine (D3 Force) ---
+  const simulation = d3.forceSimulation(nodes)
+    .force("link", d3.forceLink(links).id(d => d.id).distance(140))
+    .force("charge", d3.forceManyBody().strength(-300))
+    .force("center", d3.forceCenter(width / 2, height / 2))
+    .force("collide", d3.forceCollide().radius(90)) // Keep them apart
+    .on("tick", ticked);
+
+  function ticked() {
+    link
+      .attr("x1", d => d.source.x)
+      .attr("y1", d => d.source.y)
+      .attr("x2", d => d.target.x)
+      .attr("y2", d => d.target.y);
+
+    node
+      .attr("transform", d => `translate(${d.x}, ${d.y})`);
+  }
+
+</script>
+
+<style>
+  .sim-container {
+    background: #0f172a;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 8px;
+    padding: 2rem;
+    margin: 2rem 0;
+  }
+  .legend {
+    color: var(--sl-color-gray-3);
+    font-size: 0.9rem;
+    text-align: center;
+    margin-top: 1rem;
+    font-style: italic;
+  }
+</style>

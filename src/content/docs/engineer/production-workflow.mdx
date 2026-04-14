@@ -1,0 +1,48 @@
+---
+title: Field POC to Production Workflow
+description: Establishing engineering discipline for rapid prototyping.
+---
+
+import WorkflowSim from '../../../components/physics/WorkflowSim.astro';
+
+When transitioning a successful Proof of Concept (POC) into production, the immediate instinct of a development team is to "strip the harness and ship the code." When that developer is a first-year student (like "Rookie") using rapid prototyping tools, the pressure of immediate requests will inevitably break the system architecture.
+
+This document establishes the **strict sequential gating process** required for any feature request entering the production pipeline.
+
+<WorkflowSim />
+
+---
+
+## The Workflow Blueprint
+
+To prevent architectural entropy under pressure, all requests must adhere to this six-stage gated workflow. The underlying logic is simple: **We do not write a single line of production code until the solution is mathematically and architecturally validated.**
+
+### 1. Request Received
+Any feature request coming via Slack, email, or a WhatsApp group must be formally logged. "Rookie" is instructed not to start coding on an ad-hoc WhatsApp message; the request is the starting gun, not the green light.
+
+### 2. Manual Block Diagram Generation
+This is the critical abstraction layer. Before solving the problem, we must define it.
+* **Requirement:** Draw the solution topology (data flow, components, API endpoints) manually.
+* **Control:** This diagram **must** be version-controlled in the repository alongside the documentation. It is the architectural record.
+
+### 3. AI Model Feasibility Research
+Before committing engineering resources, we use AI models to validate technical feasibility.
+* *Example:* If we are integrating a new sensor protocol, the AI research must confirm the library compatibility and potential throughput bottlenecks.
+
+### 4. Stakeholder Feedback & Review
+Transparency prevents refactoring. The Rookie must share the AI research and the Block Diagram back to the initial requester for verification.
+* *Goal:* Confirm that the Rookie's architectural understanding matches the business requirement *before* coding begins.
+
+### 5. Official Diagram Approval
+This is the **Go/No-Go gate**. Coding cannot start until the Block Diagram is approved by a senior stakeholder or the system architect. If rejected, the workflow resets to Stage 2.
+
+### 6. START CODING (w/ Antigravity)
+Only after Stage 5 is approved is Rookie authorized to open the editor. The code is written following the approved architecture, using the appropriate rapid-prototyping tools (like Antigravity) for expedited development.
+
+---
+
+## Logic Validation (Verlet Engine)
+
+The simulation above demonstrates the physics of the process. While the nodes bounce organically, the **Force Links** maintain the strict order. If "Rookie" tries to jump from (1) to (6), the topological constraints (the arrows) pull the system back into its stable engineering solution.
+
+By strictly following this workflow, we decouple content creation from deployment automation, allowing the Rookie to write robust code even under extreme pressure.
