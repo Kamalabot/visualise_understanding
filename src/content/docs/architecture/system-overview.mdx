@@ -1,0 +1,31 @@
+---
+title: System Architecture Overview
+description: Deep dive into the Astro, Starlight, and D3 living documentation stack.
+---
+
+import NetworkPulse from '../../../components/physics/NetworkPulse.astro';
+
+This document outlines the underlying architecture of our "Living Documentation" platform. By combining static site generation with client-side physics engines, we can create educational materials that react to parameters in real-time.
+
+## 1. The Core Stack
+
+Our platform relies on three distinct layers to deliver interactive content:
+
+* **Starlight (The Framework):** Built on top of Astro, this handles the routing, sidebar generation, typography, and Markdown (MDX) parsing.
+* **Astro Components (The Bridge):** `.astro` files act as isolated containers. They allow us to write standard HTML/JS while keeping the CSS scoped globally, preventing style leaks.
+* **D3.js (The Physics Engine):** We utilize the `d3-force` module for Verlet integration, particle systems, and continuous animation loops within our components.
+
+---
+
+## 2. How the Integration Works
+
+The magic of this setup lies in the **MDX** format. Standard Markdown is static, but MDX allows us to import interactive UI components directly into the prose.
+
+### The Component Injection
+When writing documentation, we construct a D3 simulation in an isolated component (e.g., `NetworkPulse.astro`). We then import and invoke it exactly like an HTML tag:
+
+```javascript
+// Example of how the component below is injected
+import NetworkPulse from '../../../components/physics/NetworkPulse.astro';
+
+<NetworkPulse />

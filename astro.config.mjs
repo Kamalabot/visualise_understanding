@@ -11,7 +11,13 @@ export default defineConfig({
 			customCss: ['./src/styles/custom.css'],
 			// Explicit sidebar mapping
 			sidebar: [
-				{ label: 'Home', link: '/' },
+        { label: 'Home', link: '/' },
+        { 
+            label: 'Architecture', // New Section
+            items: [
+              { label: 'System Overview', link: '/architecture/system-overview/' }
+            ] 
+          },
 				{ 
 					label: 'Simulations', 
 					items: [
